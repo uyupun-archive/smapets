@@ -48,29 +48,29 @@ const Setting = () => {
   return (
     <div >
       <h1 className={style.title}>設定</h1>
-      <form className={style.container} onSubmit={onSubmit}>
-        <div>
+      <form className={style.form} onSubmit={onSubmit}>
+        <div className={style.form__container}>
           <label>
-            しゅるい
-            <select name={"kind"} dafaultvalue={"dog"}>
+            <span>しゅるい</span>
+            <select className={style.selectbox} name={"kind"} dafaultvalue={"dog"}>
               <option dafaultvalue="dog">犬</option>
               <option dafaultvalue="cat">猫</option>
             </select>
           </label>
         </div>
-        <div>
+        <div className={style.form__container}>
           <label>
-            おなまえ
-            <input type="textbox" name="petName"/>
+            <span>おなまえ</span>
+            <input  className={style.formbox} type="textbox" name="petName"/>
           </label> 
         </div>
-        <div>
+        <div className={style.form__container}>
           <label>
-            あなたの名前
-            <input type="textbox" name="userName"/>
+            <span>飼い主の名前</span>
+            <input className={style.formbox} type="textbox" name="userName"/>
           </label>
         </div>
-        <button type="submit">設定する</button>
+        <button className={style.settingbtn}type="submit">設定する</button>
       </form>
     </div>
   );
