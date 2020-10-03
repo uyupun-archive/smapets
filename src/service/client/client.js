@@ -19,22 +19,22 @@ class Client {
     }
   }
 
-  async updateUser(user) {
+  updateUser(user) {
     this.data.user = user;
-    await this.updateLocalStorage();
+    this.updateLocalStorage();
   }
 
-  async updateDog(dog) {
+  updateDog(dog) {
     this.data.dog = dog;
-    await this.updateLocalStorage();
+    this.updateLocalStorage();
   }
 
-  async appendHistory(history) {
-    this.data.history.append(history);
-    await this.updateLocalStorage();
+  appendHistory(history) {
+    this.data.history.push(history);
+    this.updateLocalStorage();
   }
 
-  async updateLocalStorage() {
+  updateLocalStorage() {
     localStorage.setItem("data", JSON.stringify(this.data));
   }
 }

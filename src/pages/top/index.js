@@ -19,6 +19,15 @@ const Top = () => {
     let hp = pet.hp - Math.floor(Math.random() * 10);
     if (hp < 0) {
       hp = 0;
+
+      const tomb = {
+        kind: pet.kind,
+        name: pet.name,
+        createDatetime: pet.createDatetime,
+        deathDatetime: new Date(),
+      };
+
+      new Client().appendHistory(tomb);
     }
 
     const update = { ...pet, hp: hp };
