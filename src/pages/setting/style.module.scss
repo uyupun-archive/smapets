@@ -22,13 +22,23 @@
 
 .selectbox {
   width: 150px;
-  height: 30px; 
+  height: 30px;
+  font-size: 14px;
+  background: #ffffff;
+  padding: 0 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
 }
 
 .formbox {
   width: 150px;
   height: 30px;
   box-sizing: border-box;
+  font-size: 14px;
+  background: #ffffff;
+  padding: 0 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
 }
 
 .settingbtn{
@@ -40,4 +50,13 @@
   background: #05D2FF;
   font-size: 18px;
   display: inline-block;
+  outline: none;
+}
+
+.error {
+  &__message {
+    font-size: 14px;
+    color: #ff1111;
+    margin: 0;
+  }
 }

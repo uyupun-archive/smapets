@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import style from "./style.module.scss";
 import { Client } from "../../service/client/client";
 import useInterval from "use-interval";
@@ -6,25 +7,32 @@ import { Status } from "../../components/status";
 
 const Top = () => {
   const [pet, setPet] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     const client = new Client();
+    if (!client.data.dog.createDatetime) {
+      history.push("/setting");
+      return;
+    }
     setPet(client.data.dog);
-  }, []);
+  }, [history]);
 
   useInterval(() => {
     if (pet.hp === 0) {
       return;
     }
     let hp = pet.hp - Math.floor(Math.random() * 10);
-    if (hp < 0) {
+    if (hp <= 0) {
       hp = 0;
+      const date = new Date();
+      pet.deathDatetime = date;
 
       const tomb = {
         kind: pet.kind,
         name: pet.name,
         createDatetime: pet.createDatetime,
-        deathDatetime: new Date(),
+        deathDatetime: date,
       };
 
       new Client().appendHistory(tomb);
@@ -53,24 +61,30 @@ const Top = () => {
 
   return (
     <div>
-      <header className={style.header}>
-        <div className={style.header__petName}>{pet.name}</div>
-        <div className={style.header__petStatus}>
-          <Status status={pet.status} />
-        </div>
-        <div className={style.header__petMaxHPBar}>
-          <div
-            className={style.header__petHPBar}
-            style={{ width: pet.hp + "%" }}
-          ></div>
-        </div>
-        <div className={style.header__petHP}>
-          {pet.hp}/{pet.maxHP}
-        </div>
-      </header>
-      <main className={style.main} onClick={clickDog}>
-        pet
-      </main>
+      {
+        Object.keys(pet).length
+        ? <>
+          <header className={style.header}>
+            <div className={style.header__petName}>{pet.name}</div>
+            <div className={style.header__petStatus}>
+              <Status status={pet.status} />
+            </div>
+            <div className={style.header__petMaxHPBar}>
+              <div
+                className={style.header__petHPBar}
+                style={{ width: pet.hp + "%" }}
+              ></div>
+            </div>
+            <div className={style.header__petHP}>
+              {pet.hp}/{pet.maxHP}
+            </div>
+          </header>
+          <main className={style.main} onClick={clickDog}>
+            pet
+          </main>
+        </>
+        : <></>
+      }
     </div>
   );
 };
