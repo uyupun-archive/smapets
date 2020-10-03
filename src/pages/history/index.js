@@ -32,7 +32,7 @@ const History = () => {
   return (
     <div>
       <div className={style.container}>
-        <h1 className={style.title}>歴代ペット</h1>
+        <h1 className={style.title}>歴代のペット</h1>
         <span className={style.sort} onClick={() => {
           setSort(sort === "asc" ? "desc" : "asc");
           histories.reverse();
