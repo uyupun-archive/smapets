@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import style from './style.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faPaw, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faPaw, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const location = useLocation();
@@ -35,12 +35,12 @@ const Navbar = () => {
         </li>
         <li className={style.item}>
           {
-            path === 'friends'
+            path === 'history'
               ? <span>
-                <FontAwesomeIcon icon={faUserFriends} color={'#ff9b04'}/>
+                <FontAwesomeIcon icon={faBook} color={'#ff9b04'}/>
               </span>
-              : <Link to={'/'}>
-                <FontAwesomeIcon icon={faUserFriends} color={'#ff9b04'}/>
+              : <Link to={'/history'}>
+                <FontAwesomeIcon icon={faBook} color={'#ff9b04'}/>
               </Link>
           }
         </li>
