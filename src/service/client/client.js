@@ -11,6 +11,7 @@ class Client {
           kind: "",
           name: "",
           createDatetime: "",
+          deathDatetime: "",
           maxHP: 0,
           hp: 0,
         },

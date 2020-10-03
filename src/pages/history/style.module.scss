@@ -30,4 +30,17 @@
   &__period {
     font-size: 14px;
   }
+
+  &__not {
+    text-align: center;
+    font-size: 14px;
+
+    &Message {
+      margin: 0;
+    }
+
+    &Link {
+      color: #ff9b04;
+    }
+  }
 }

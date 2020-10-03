@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
-import style from './style.module.scss'
+import style from './style.module.scss';
+import { useHistory } from "react-router-dom";
+import { Client } from "../../service/client/client";
 
 const Setting = () => {
+  const history = useHistory();
   const [errors, setErrors] = useState({
     kind: {
       error: false
@@ -38,11 +41,23 @@ const Setting = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (validation(e)) {
-      console.log('error');
-    } else {
-      console.log('success');
-    }
+    errors.kind.error = false;
+    errors.petName.error = false;
+    errors.userName.error = false;
+    setErrors(Object.assign({}, errors));
+
+    if (validation(e)) return;
+    const client = new Client();
+    client.updateUser({ name: e.target.userName.value });
+    client.updateDog({
+      kind: e.target.kind.value,
+      name: e.target.petName.value,
+      createDatetime: new Date(),
+      deathDatetime: "",
+      maxHP: 100,
+      hp: 100,
+    });
+    history.push("/");
   }
 
   return (
@@ -57,18 +72,27 @@ const Setting = () => {
               <option dafaultvalue="cat">猫</option>
             </select>
           </label>
+          {
+            errors.kind.error && <p className={style.error__message}>選択してください</p>
+          }
         </div>
         <div className={style.form__container}>
           <label>
             <span>おなまえ</span>
             <input  className={style.formbox} type="textbox" name="petName"/>
           </label> 
+          {
+            errors.petName.error && <p className={style.error__message}>入力してください</p>
+          }
         </div>
         <div className={style.form__container}>
           <label>
             <span>飼い主の名前</span>
             <input className={style.formbox} type="textbox" name="userName"/>
           </label>
+          {
+            errors.userName.error && <p className={style.error__message}>入力してください</p>
+          }
         </div>
         <button className={style.settingbtn}type="submit">設定する</button>
       </form>
