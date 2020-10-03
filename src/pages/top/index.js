@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
-import StatusIcon from "./images/grin-alt-solid1.svg";
+import { Status } from "../../components/status";
 
 const Top = () => {
   const [pet, setPet] = useState({
@@ -33,11 +33,3 @@ const Top = () => {
 };
 
 export { Top };
-
-const Status = (props) => {
-  switch (props.status) {
-    case 0:
-      return <img src={StatusIcon} />;
-  }
-  return <>noimage</>;
-};
