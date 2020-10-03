@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
-import StatusIcon from "./images/grin-alt-solid1.svg";
 import { Client } from "../../service/client/client";
 import useInterval from "use-interval";
+import { Status } from "../../components/status";
 
 const Top = () => {
   const [pet, setPet] = useState({});
@@ -65,11 +65,3 @@ const Top = () => {
 };
 
 export { Top };
-
-const Status = (props) => {
-  switch (props.status) {
-    case 0:
-      return <img src={StatusIcon} />;
-  }
-  return <>noimage</>;
-};
