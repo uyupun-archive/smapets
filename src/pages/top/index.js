@@ -1,14 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import StatusIcon from "./images/grin-alt-solid1.svg";
+import { Client } from "../../service/client/client";
+import useInterval from "use-interval";
 
 const Top = () => {
-  const [pet, setPet] = useState({
-    name: "いぬ",
-    status: 0,
-    hp: 80,
-    maxHP: 100,
-  });
+  const [pet, setPet] = useState({});
+
+  useEffect(() => {
+    const client = new Client();
+    setPet(client.data.dog);
+  }, []);
+
+  useInterval(() => {
+    if (pet.hp === 0) {
+      return;
+    }
+    let hp = pet.hp - Math.floor(Math.random() * 10);
+    if (hp < 0) {
+      hp = 0;
+    }
+
+    const update = { ...pet, hp: hp };
+    setPet(update);
+    new Client().updateDog(update);
+  }, 1000);
+
+  const clickDog = () => {
+    if (pet.hp === 0 || pet.hp === pet.maxHP) {
+      return;
+    }
+
+    let hp = pet.hp + Math.floor(Math.random() * 10);
+    if (hp > pet.maxHP) {
+      hp = pet.maxHP;
+    }
+    const update = { ...pet, hp: hp };
+    setPet(update);
+    new Client().updateDog(update);
+  };
 
   return (
     <div>
@@ -27,7 +57,9 @@ const Top = () => {
           {pet.hp}/{pet.maxHP}
         </div>
       </header>
-      <main className={style.main}>pet</main>
+      <main className={style.main} onClick={clickDog}>
+        pet
+      </main>
     </div>
   );
 };
