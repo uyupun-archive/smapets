@@ -47,6 +47,8 @@ const Top = () => {
     const update = { ...pet, hp: hp };
     setPet(update);
     new Client().updateDog(update);
+
+    navigator.vibrate(500);
   };
 
   return (
