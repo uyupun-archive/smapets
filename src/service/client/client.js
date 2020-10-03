@@ -4,10 +4,7 @@ class Client {
     this.data = JSON.parse(dataString);
     if (this.data === null) {
       this.data = {
-        user: {
-          name: "",
-        },
-        dog: {
+        pet: {
           kind: "",
           name: "",
           createDatetime: "",
@@ -20,13 +17,8 @@ class Client {
     }
   }
 
-  updateUser(user) {
-    this.data.user = user;
-    this.updateLocalStorage();
-  }
-
-  updateDog(dog) {
-    this.data.dog = dog;
+  updatePet(pet) {
+    this.data.pet = pet;
     this.updateLocalStorage();
   }
 

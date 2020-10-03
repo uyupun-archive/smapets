@@ -12,9 +12,6 @@ const Setting = () => {
     petName: {
       error: false
     },
-    userName: {
-      error: false
-    }
   });
 
   const setError = (key) => {
@@ -32,10 +29,6 @@ const Setting = () => {
       isError = true;
       setError('petName');
     }
-    if (!e.target.userName.value.trim()) {
-      isError = true;
-      setError('userName');
-    }
     return isError;
   }
 
@@ -43,13 +36,11 @@ const Setting = () => {
     e.preventDefault();
     errors.kind.error = false;
     errors.petName.error = false;
-    errors.userName.error = false;
     setErrors(Object.assign({}, errors));
 
     if (validation(e)) return;
     const client = new Client();
-    client.updateUser({ name: e.target.userName.value });
-    client.updateDog({
+    client.updatePet({
       kind: e.target.kind.value,
       name: e.target.petName.value,
       createDatetime: new Date(),
@@ -62,7 +53,7 @@ const Setting = () => {
 
   return (
     <div >
-      <h1 className={style.title}>設定</h1>
+      <h1 className={style.title}>ペットの選択</h1>
       <form className={style.form} onSubmit={onSubmit}>
         <div className={style.form__container}>
           <label>
@@ -85,16 +76,7 @@ const Setting = () => {
             errors.petName.error && <p className={style.error__message}>入力してください</p>
           }
         </div>
-        <div className={style.form__container}>
-          <label>
-            <span>飼い主の名前</span>
-            <input className={style.formbox} type="textbox" name="userName"/>
-          </label>
-          {
-            errors.userName.error && <p className={style.error__message}>入力してください</p>
-          }
-        </div>
-        <button className={style.settingbtn}type="submit">設定する</button>
+        <button className={style.settingbtn}type="submit">飼う</button>
       </form>
     </div>
   );
