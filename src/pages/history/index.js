@@ -13,7 +13,7 @@ const History = () => {
   useEffect(() => {
     const client = new Client();
     setHistories(client.data.history);
-    setPet(client.data.dog)
+    setPet(client.data.pet)
   }, []);
 
   const dateFormat = (date) => {

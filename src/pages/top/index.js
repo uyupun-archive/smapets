@@ -11,11 +11,11 @@ const Top = () => {
 
   useEffect(() => {
     const client = new Client();
-    if (!client.data.dog.createDatetime) {
+    if (!client.data.pet.createDatetime) {
       history.push("/setting");
       return;
     }
-    setPet(client.data.dog);
+    setPet(client.data.pet);
   }, [history]);
 
   useInterval(() => {
@@ -40,10 +40,10 @@ const Top = () => {
 
     const update = { ...pet, hp: hp };
     setPet(update);
-    new Client().updateDog(update);
+    new Client().updatePet(update);
   }, 1000);
 
-  const clickDog = () => {
+  const clickPet = () => {
     if (pet.hp === 0 || pet.hp === pet.maxHP) {
       return;
     }
@@ -54,7 +54,7 @@ const Top = () => {
     }
     const update = { ...pet, hp: hp };
     setPet(update);
-    new Client().updateDog(update);
+    new Client().updatePet(update);
 
     navigator.vibrate(500);
   };
@@ -78,7 +78,7 @@ const Top = () => {
               {pet.hp}/{pet.maxHP}
             </div>
           </header>
-          <main className={style.main} onClick={clickDog}>
+          <main className={style.main} onClick={clickPet}>
             pet
           </main>
         </>
