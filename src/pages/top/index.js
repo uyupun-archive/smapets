@@ -71,7 +71,10 @@ const Top = () => {
             <div className={style.header__petMaxHPBar}>
               <div
                 className={style.header__petHPBar}
-                style={{ width: pet.hp + "%" }}
+                style={{
+                  width: pet.hp + "%",
+                  borderRadius: pet.hp === pet.maxHP ? "5px" : "5px 0 0 5px",
+                }}
               ></div>
             </div>
             <div className={style.header__petHP}>
