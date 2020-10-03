@@ -61,13 +61,12 @@ const Top = () => {
 
   return (
     <div>
-      {
-        Object.keys(pet).length
-        ? <>
+      {Object.keys(pet).length ? (
+        <>
           <header className={style.header}>
             <div className={style.header__petName}>{pet.name}</div>
             <div className={style.header__petStatus}>
-              <Status status={pet.status} />
+              <Status ratio={(pet.hp / pet.maxHP) * 100} />
             </div>
             <div className={style.header__petMaxHPBar}>
               <div
@@ -83,8 +82,9 @@ const Top = () => {
             pet
           </main>
         </>
-        : <></>
-      }
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
