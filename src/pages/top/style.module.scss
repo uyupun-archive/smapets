@@ -1,3 +1,41 @@
-.title {
-  color: red;
+.header {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin: 30px auto 0 auto;
+  font-size: 14px;
+
+  &__petName {
+    margin-top: 5px;
+    line-height: 14px;
+  }
+
+  &__petStatus {
+    margin-left: 20px;
+  }
+
+  &__petMaxHPBar {
+    margin-top: 5px;
+    height: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 20px;
+    flex-grow: 1;
+  }
+
+  &__petHPBar {
+    height: 100%;
+    display: block;
+    background-color: #00ff00;
+  }
+
+  &__petHP {
+    margin-top: 5px;
+    color: #999999;
+    margin-left: 10px;
+  }
+}
+
+.main {
+  padding: 100px;
 }
