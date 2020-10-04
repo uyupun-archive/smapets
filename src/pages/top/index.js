@@ -4,9 +4,14 @@ import style from "./style.module.scss";
 import { Client } from "../../service/client/client";
 import useInterval from "use-interval";
 import { Status } from "../../components/status";
+import Tomb from "../../assets/images/tombs/tomb.png";
+import * as Cat from "../../assets/images/cats/neko";
 
 const Top = () => {
   const [pet, setPet] = useState({});
+  const [emotion, setEmotion] = useState(Cat.Neko);
+  const [timeoutId, setTimeoutId] = useState();
+  const [clickCount, setClickCount] = useState(0);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,6 +49,7 @@ const Top = () => {
   }, 1000);
 
   const clickPet = () => {
+    if (timeoutId) clearTimeout(timeoutId);
     if (pet.hp === 0 || pet.hp === pet.maxHP) {
       return;
     }
@@ -57,6 +63,25 @@ const Top = () => {
     new Client().updatePet(update);
 
     navigator.vibrate(500);
+
+    setClickCount(clickCount + 1);
+    if (clickCount >= 5) {
+      setEmotion(Cat.NekoDo);
+      const timerID = setTimeout(() => {
+        setEmotion(Cat.Neko);
+        setClickCount(0);
+        clearTimeout(timeoutId);
+      }, 3000);
+      setTimeoutId(timerID);
+      return;
+    }
+
+    setEmotion(Cat.NekoKi);
+    const timerID = setTimeout(() => {
+      setEmotion(Cat.Neko);
+      setClickCount(0);
+    }, 3000);
+    setTimeoutId(timerID);
   };
 
   return (
@@ -78,8 +103,19 @@ const Top = () => {
               {pet.hp}/{pet.maxHP}
             </div>
           </header>
-          <main className={style.main} onClick={clickPet}>
-            pet
+          <main className={style.main}>
+            {
+              pet.deathDatetime
+                ? <div
+                  className={style.pet}
+                  style={{backgroundImage: `url(${Tomb})`}}
+                />
+                : <div
+                  className={style.pet}
+                  onClick={emotion !== Cat.NekoDo ? clickPet : () => {}}
+                  style={{backgroundImage: `url(${((pet.hp / pet.maxHP) * 100 < 50) ? Cat.NekoAi : emotion})`}}
+                />
+            }
           </main>
         </>
       ) : (
