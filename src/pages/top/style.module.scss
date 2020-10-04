@@ -36,5 +36,14 @@
 }
 
 .main {
-  padding: 100px;
+  padding: 50px 0 30px;
+
+  & .pet {
+    width: 90vw;
+    height: 90vw;
+    background: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+  }
 }
