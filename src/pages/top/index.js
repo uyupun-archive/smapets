@@ -72,6 +72,8 @@ const Top = () => {
       };
 
       new Client().appendHistory(tomb);
+      // 死んだ時に鳴く
+      [dog1, dog2, dog3, dog4, dog5][Math.floor(Math.random() * 5)]();
     }
 
     const update = { ...pet, hp: hp };
