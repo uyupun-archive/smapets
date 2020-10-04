@@ -52,6 +52,8 @@ const Top = () => {
       };
 
       new Client().appendHistory(tomb);
+      // 死んだ時に鳴く
+      [dog1, dog2, dog3, dog4, dog5][Math.floor(Math.random() * 5)]();
     }
 
     const update = { ...pet, hp: hp };
@@ -121,18 +123,22 @@ const Top = () => {
             </div>
           </header>
           <main className={style.main}>
-            {
-              pet.deathDatetime
-                ? <div
-                  className={style.pet}
-                  style={{backgroundImage: `url(${Tomb})`}}
-                />
-                : <div
-                  className={style.pet}
-                  onClick={emotion !== Cat.NekoDo ? clickPet : () => {}}
-                  style={{backgroundImage: `url(${((pet.hp / pet.maxHP) * 100 < 50) ? Cat.NekoAi : emotion})`}}
-                />
-            }
+            {pet.deathDatetime ? (
+              <div
+                className={style.pet}
+                style={{ backgroundImage: `url(${Tomb})` }}
+              />
+            ) : (
+              <div
+                className={style.pet}
+                onClick={emotion !== Cat.NekoDo ? clickPet : () => {}}
+                style={{
+                  backgroundImage: `url(${
+                    (pet.hp / pet.maxHP) * 100 < 50 ? Cat.NekoAi : emotion
+                  })`,
+                }}
+              />
+            )}
           </main>
         </>
       ) : (
