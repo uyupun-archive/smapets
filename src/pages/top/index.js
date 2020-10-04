@@ -6,6 +6,7 @@ import useInterval from "use-interval";
 import { Status } from "../../components/status";
 import Tomb from "../../assets/images/tombs/tomb.png";
 import * as Cat from "../../assets/images/cats/neko";
+import * as Dog from "../../assets/images/dogs/shiba";
 import useSound from "use-sound";
 import d1 from "../../assets/sounds/dog/1.mp3";
 import d2 from "../../assets/sounds/dog/2.mp3";
@@ -15,9 +16,10 @@ import d5 from "../../assets/sounds/dog/5.mp3";
 
 const Top = () => {
   const [pet, setPet] = useState({});
-  const [emotion, setEmotion] = useState(Cat.Neko);
+  const [emotion, setEmotion] = useState();
   const [timeoutId, setTimeoutId] = useState();
   const [clickCount, setClickCount] = useState(0);
+  const [kind, setKind] = useState();
   const history = useHistory();
   const [dog1] = useSound(d1);
   const [dog2] = useSound(d2);
@@ -32,7 +34,25 @@ const Top = () => {
       return;
     }
     setPet(client.data.pet);
+    const kind = getPetKind(client.data.pet.kind);
+    setKind(kind);
+    setEmotion(kind.Init);
   }, [history]);
+
+  const getPetKind = (kind) => {
+    let pet;
+    switch (kind) {
+      case "犬":
+        pet = Dog;
+        break;
+      case "猫":
+        pet = Cat;
+        break;
+      default:
+        pet = Dog;
+    }
+    return pet;
+  };
 
   useInterval(() => {
     if (pet.hp === 0) {
@@ -77,11 +97,12 @@ const Top = () => {
 
     navigator.vibrate(500);
 
+    // 3秒以内に5回クリック 「怒」
     setClickCount(clickCount + 1);
     if (clickCount >= 5) {
-      setEmotion(Cat.NekoDo);
+      setEmotion(kind.Do);
       const timerID = setTimeout(() => {
-        setEmotion(Cat.Neko);
+        setEmotion(kind.Init);
         setClickCount(0);
         clearTimeout(timeoutId);
       }, 3000);
@@ -89,15 +110,16 @@ const Top = () => {
       return;
     }
 
-    setEmotion(Cat.NekoKi);
+    // クリック 「喜」
+    setEmotion(kind.Ki);
     const timerID = setTimeout(() => {
-      setEmotion(Cat.Neko);
+      setEmotion(kind.Init);
       setClickCount(0);
     }, 3000);
     setTimeoutId(timerID);
-    //if (pet.kind === "犬") {
+
+    // サウンド
     [dog1, dog2, dog3, dog4, dog5][Math.floor(Math.random() * 5)]();
-    //}
   };
 
   return (
@@ -123,22 +145,18 @@ const Top = () => {
             </div>
           </header>
           <main className={style.main}>
-            {pet.deathDatetime ? (
-              <div
-                className={style.pet}
-                style={{ backgroundImage: `url(${Tomb})` }}
-              />
-            ) : (
-              <div
-                className={style.pet}
-                onClick={emotion !== Cat.NekoDo ? clickPet : () => {}}
-                style={{
-                  backgroundImage: `url(${
-                    (pet.hp / pet.maxHP) * 100 < 50 ? Cat.NekoAi : emotion
-                  })`,
-                }}
-              />
-            )}
+            {
+              pet.deathDatetime
+                ? <div
+                  className={style.pet}
+                  style={{backgroundImage: `url(${Tomb})`}}
+                />
+                : <div
+                  className={style.pet}
+                  onClick={emotion !== kind.Do ? clickPet : () => {}}
+                  style={{backgroundImage: `url(${((pet.hp / pet.maxHP) * 100 < 50) ? kind.Ai : emotion})`}}
+                />
+            }
           </main>
         </>
       ) : (
