@@ -42,10 +42,19 @@
   border-radius: 5px;
 }
 
+.image {
+  width: 40vw;
+  height: 40vw;
+  margin: 0 auto;
+  background: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .settingbtn {
-  margin: 60px auto;
   width: 150px;
   height: 40px;
+  margin: 0 auto;
   border: 0;
   border-radius: 10px;
   background: #ff9b04;
