@@ -4,10 +4,21 @@ import style from "./style.module.scss";
 import { Client } from "../../service/client/client";
 import useInterval from "use-interval";
 import { Status } from "../../components/status";
+import useSound from "use-sound";
+import d1 from "../../assets/sounds/dog/1.mp3";
+import d2 from "../../assets/sounds/dog/2.mp3";
+import d3 from "../../assets/sounds/dog/3.mp3";
+import d4 from "../../assets/sounds/dog/4.mp3";
+import d5 from "../../assets/sounds/dog/5.mp3";
 
 const Top = () => {
   const [pet, setPet] = useState({});
   const history = useHistory();
+  const [dog1] = useSound(d1);
+  const [dog2] = useSound(d2);
+  const [dog3] = useSound(d3);
+  const [dog4] = useSound(d4);
+  const [dog5] = useSound(d5);
 
   useEffect(() => {
     const client = new Client();
@@ -57,6 +68,10 @@ const Top = () => {
     new Client().updatePet(update);
 
     navigator.vibrate(500);
+
+    //if (pet.kind === "犬") {
+    [dog1, dog2, dog3, dog4, dog5][Math.floor(Math.random() * 5)]();
+    //}
   };
 
   return (
