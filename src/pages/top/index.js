@@ -6,6 +6,12 @@ import useInterval from "use-interval";
 import { Status } from "../../components/status";
 import Tomb from "../../assets/images/tombs/tomb.png";
 import * as Cat from "../../assets/images/cats/neko";
+import useSound from "use-sound";
+import d1 from "../../assets/sounds/dog/1.mp3";
+import d2 from "../../assets/sounds/dog/2.mp3";
+import d3 from "../../assets/sounds/dog/3.mp3";
+import d4 from "../../assets/sounds/dog/4.mp3";
+import d5 from "../../assets/sounds/dog/5.mp3";
 
 const Top = () => {
   const [pet, setPet] = useState({});
@@ -13,6 +19,11 @@ const Top = () => {
   const [timeoutId, setTimeoutId] = useState();
   const [clickCount, setClickCount] = useState(0);
   const history = useHistory();
+  const [dog1] = useSound(d1);
+  const [dog2] = useSound(d2);
+  const [dog3] = useSound(d3);
+  const [dog4] = useSound(d4);
+  const [dog5] = useSound(d5);
 
   useEffect(() => {
     const client = new Client();
@@ -82,6 +93,9 @@ const Top = () => {
       setClickCount(0);
     }, 3000);
     setTimeoutId(timerID);
+    //if (pet.kind === "犬") {
+    [dog1, dog2, dog3, dog4, dog5][Math.floor(Math.random() * 5)]();
+    //}
   };
 
   return (
@@ -96,7 +110,10 @@ const Top = () => {
             <div className={style.header__petMaxHPBar}>
               <div
                 className={style.header__petHPBar}
-                style={{ width: pet.hp + "%" }}
+                style={{
+                  width: pet.hp + "%",
+                  borderRadius: pet.hp === pet.maxHP ? "5px" : "5px 0 0 5px",
+                }}
               ></div>
             </div>
             <div className={style.header__petHP}>

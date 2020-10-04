@@ -35,7 +35,7 @@ const History = () => {
   return (
     <div>
       <div className={style.container}>
-        <h1 className={style.title}>歴代のペット</h1>
+        <h1 className={style.title}>ペットとの思い出</h1>
         {
           histories.length
             ? <>
@@ -47,11 +47,11 @@ const History = () => {
               {
                 sort === "asc"
                   ? <>
-                    <span className={style.sort__text}>昇順</span>
+                    <span className={style.sort__text}>古い順</span>
                     <FontAwesomeIcon icon={faCaretUp} size={"2x"}/>
                   </>
                   : <>
-                    <span className={style.sort__text}>降順</span>
+                    <span className={style.sort__text}>新しい順</span>
                     <FontAwesomeIcon icon={faCaretDown} size={"2x"}/>
                   </>
               }

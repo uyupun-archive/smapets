@@ -53,7 +53,7 @@ const Setting = () => {
 
   return (
     <div >
-      <h1 className={style.title}>ペットの選択</h1>
+      <h1 className={style.title}>ペットを飼う</h1>
       <form className={style.form} onSubmit={onSubmit}>
         <div className={style.form__container}>
           <label>
@@ -71,12 +71,12 @@ const Setting = () => {
           <label>
             <span>おなまえ</span>
             <input  className={style.formbox} type="textbox" name="petName"/>
-          </label> 
+          </label>
           {
             errors.petName.error && <p className={style.error__message}>入力してください</p>
           }
         </div>
-        <button className={style.settingbtn}type="submit">飼う</button>
+        <button className={style.settingbtn}type="submit">君に決めた！</button>
       </form>
     </div>
   );
