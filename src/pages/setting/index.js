@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import style from './style.module.scss';
 import { useHistory } from "react-router-dom";
 import { Client } from "../../service/client/client";
+import { Neko } from "../../assets/images/cats/neko";
 
 const Setting = () => {
   const history = useHistory();
@@ -75,6 +76,10 @@ const Setting = () => {
           {
             errors.petName.error && <p className={style.error__message}>入力してください</p>
           }
+        </div>
+        <div className={style.form__container}>
+          <div className={style.image} style={{backgroundImage: `url(${Neko})`}} />
+          {/* TODO: 犬の対応 */}
         </div>
         <button className={style.settingbtn}type="submit">君に決めた！</button>
       </form>
