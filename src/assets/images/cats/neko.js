@@ -1,13 +1,13 @@
-import Neko from "./neko.png";
-import NekoKi from "./neko_ki.png";
-import NekoDo from "./neko_do.png";
-import NekoAi from "./neko_ai.png";
-import NekoRa from "./neko_ra.png";
+import Init from "./neko.png";
+import Ki from "./neko_ki.png";
+import Do from "./neko_do.png";
+import Ai from "./neko_ai.png";
+import Ra from "./neko_ra.png";
 
 export {
-  Neko,
-  NekoKi,
-  NekoDo,
-  NekoAi,
-  NekoRa,
+  Init,
+  Ki,
+  Do,
+  Ai,
+  Ra,
 }
